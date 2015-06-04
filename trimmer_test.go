@@ -25,12 +25,14 @@ var _ = Describe("trimmer", func() {
 				Field4 stringalias
 			}
 
-			s := " ptr field        "
-			ptr := &s
+			s1 := " ptr field        "
+			s2 := " ptr field        "
+			ptr1 := &s1
+			ptr2 := &s2
 			t := test{
 				Field1: "  field1   ",
-				Field2: ptr,
-				Field3: &ptr,
+				Field2: ptr1,
+				Field3: &ptr2,
 				Field4: "  alias ",
 			}
 
