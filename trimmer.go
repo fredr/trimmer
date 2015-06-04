@@ -44,7 +44,7 @@ func TrimStrings(ptr interface{}) error {
 		}
 
 		// trim string fields of nested structs
-		if field.Kind() == reflect.Struct && field.CanAddr() {
+		if field.Kind() == reflect.Struct && field.CanAddr() && field.Addr().CanInterface() {
 			if err := TrimStrings(field.Addr().Interface()); err != nil {
 				return err
 			}

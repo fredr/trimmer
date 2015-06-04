@@ -2,6 +2,7 @@ package trimmer_test
 
 import (
 	"testing"
+	"time"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -147,6 +148,20 @@ var _ = Describe("trimmer", func() {
 			Expect(t.Middle2.Inner2.Field2).To(Equal("field2"))
 			Expect(t.Middle2.Inner3.Field1).To(Equal("field1"))
 			Expect(t.Middle2.Inner3.Field2).To(Equal("field2"))
+		})
+
+		It("should not fail when there are wierd time types on the struct", func() {
+			type specialTime struct{ time.Time }
+
+			type test struct {
+				Time specialTime
+			}
+
+			t := test{
+				Time: specialTime{time.Now()},
+			}
+
+			Expect(TrimStrings(&t)).To(Succeed())
 		})
 	})
 })
