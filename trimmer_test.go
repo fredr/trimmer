@@ -72,10 +72,10 @@ var _ = Describe("trimmer", func() {
 			Expect(err).To(Equal(ErrInvalidType))
 		})
 
-		It("shoud not trim strings with trim tag set to false", func() {
+		It("shoud not trim strings with trim tag set to -", func() {
 			type test struct {
-				Field1 string  `trim:"false"`
-				Field2 *string `trim:"false"`
+				Field1 string  `trim:"-"`
+				Field2 *string `trim:"-"`
 			}
 
 			s := " ptr "

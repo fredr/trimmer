@@ -9,7 +9,7 @@ import (
 // ErrInvalidType is returned when an invalid type is passed to TrimStrings
 var ErrInvalidType = errors.New("ptr must be a pointer to a struct")
 
-// TrimStrings will trim whitespace from all string fields in the struct ptr points to. Can be overridden with struct tag `trim:"false"`
+// TrimStrings will trim whitespace from all string fields in the struct ptr points to. Can be overridden with struct tag `trim:"-"`
 func TrimStrings(ptr interface{}) error {
 	val := reflect.ValueOf(ptr)
 
@@ -37,7 +37,7 @@ func TrimStrings(ptr interface{}) error {
 		}
 
 		if field.Kind() == reflect.String {
-			if fieldType.Tag.Get("trim") != "false" {
+			if fieldType.Tag.Get("trim") != "-" {
 				field.SetString(strings.TrimSpace(field.String()))
 			}
 			continue
